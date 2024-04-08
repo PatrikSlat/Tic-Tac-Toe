@@ -37,6 +37,47 @@
   margin-bottom: 20px;
 }
 /* Header styling end */
+.playing-field{
+  display: flex;
+  flex-direction: row;
+  height: 60vh;
+}
+
+.winner-alert{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  background-color: rgb(89, 140, 150);
+  height: 100%;
+  width: 30%;
+}
+
+.winner-alert span{
+  font-size: larger;
+  background-color: rgb(89, 140, 150);
+}
+
+.board{
+  border: 1px solid black;
+  height: 100%;
+  width: 40%;
+}
+
+.info-alert{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  background-color: rgb(89, 140, 150);
+  height: 100%;
+  width: 30%;
+}
+
+.info-alert span{
+  font-size: larger;
+  background-color: rgb(89, 140, 150);
+}
 /* Playing field start*/
 
 /* Playing field end*/
