@@ -80,7 +80,15 @@
   background-color: rgb(89, 140, 150);
 }
 /* Playing field start*/
+.board{
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+}
 
+.row1, .row2, .row3{
+  min-height: 0;
+}
 /* Playing field end*/
 /* Footer start */
 .footer{
@@ -121,4 +129,19 @@ input{
 
 label{
   font-size: 1.5rem;
+}
+
+#restart-btn{
+  cursor: pointer;
+  height: 50px;
+  width: 150px;
+  font-size: large;
+  border: 0px;
+  background-color: rgb(54, 233, 38);
+  border-radius: 20px;
+  margin-top: 10px;
+}
+
+#restart-btn:active{
+  background-color: rgba(54, 233, 38, 0.8);
 }
