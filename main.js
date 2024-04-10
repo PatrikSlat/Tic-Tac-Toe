@@ -1,9 +1,10 @@
 // Global variables
 const startBtn = document.getElementById("start-btn");
+let players;
 
 // Event listener
 startBtn.addEventListener("click", () => {    
-    const players = Player.grabPlayerNames();
+    players = Player.grabPlayerNames();
     if (!players.playerOne || !players.playerTwo) {
         const errorAlert = document.getElementById("error-popup");
         errorAlert.innerHTML = "<br>---->PLEASE ENTER PLAYER NAMES TO CONTINUE !";
@@ -16,11 +17,12 @@ startBtn.addEventListener("click", () => {
 
 //Game Controler
 const Game = (() => {
-
+    const playerList = [];
     const start = () => {
         Gameboard.createBoard();
-        Gameboard.playingFieldActive();
-        //console.log(playerOne, playerTwo)
+        playerList.push(playerFactory(players.playerOne, "X"));
+        playerList.push(playerFactory(players.playerTwo, "O"));
+        Gameboard.playingFieldActive(playerList);
     }
 
     return{
@@ -38,7 +40,6 @@ const Gameboard = (() => {
     const createBoard = () => {
         for (let i = 1; i < 4; i++) {
             for (let j = 1; j < 4; j++) {
-                const proba = 1;
                 const div = document.createElement("div");
                 div.classList.add(`row${i}`);
                 div.id = `column${j}`;
@@ -50,10 +51,17 @@ const Gameboard = (() => {
     };
     
     //Adding clikc event listener to every div/"playing field" inside our board
-    const playingFieldActive = () => {
+    const playingFieldActive = (playerArray) => {
+        let currentPlayer = 0;
         gameboard.forEach((e) => {
             e.addEventListener("click", () => {
-                e.innerHTML = "X";
+                if(currentPlayer === 0){
+                    e.innerHTML = playerArray[currentPlayer].marker;
+                    currentPlayer += 1;
+                }else{
+                    e.innerHTML = playerArray[currentPlayer].marker;
+                    currentPlayer -= 1;
+                }
             })
         })
     };
@@ -65,7 +73,6 @@ const Gameboard = (() => {
 
 //Player Module
 const Player = (() => {
-    let playerOne, playerTwo;
 
     const grabPlayerNames = () => {
         let playerOne = document.getElementById("player-1").value;
@@ -74,16 +81,14 @@ const Player = (() => {
         return {playerOne, playerTwo};
     }
 
-    const PlayerFactory = (name, marker) => {
-        return {
-            name, 
-            marker
-        }
-    }
-
     return{
-        grabPlayerNames, PlayerFactory
+        grabPlayerNames
     }
 })();
 
-
+const playerFactory = (name, marker) => {
+    return {
+        name, 
+        marker
+    }
+}
