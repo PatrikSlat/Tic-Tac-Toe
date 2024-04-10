@@ -89,6 +89,11 @@
 .row1, .row2, .row3{
   min-height: 0;
 }
+
+.board > div{
+  text-align: center;
+  font-size: 100px;
+}
 /* Playing field end*/
 /* Footer start */
 .footer{
