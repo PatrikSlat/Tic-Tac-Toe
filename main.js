@@ -35,13 +35,15 @@ const Game = (() => {
 const Gameboard = (() => {
     // Array which contains all playable fields
     const gameboard = [];
+    const winnerSpan = document.querySelector("#winner-span");
 
     // Creates a 2D matrix which contains its corresponding coordinates (m,n) = (1,1);
     const createBoard = () => {
         for (let i = 1; i < 4; i++) {
             for (let j = 1; j < 4; j++) {
                 const div = document.createElement("div");
-                div.classList.add(`row${i}`);
+                div.classList.add("row")
+                div.classList.add(i);
                 div.id = `column${j}`;
                 div.style.border = "1px solid black";
                 gameboard.push(div);
@@ -55,16 +57,44 @@ const Gameboard = (() => {
         let currentPlayer = 0;
         gameboard.forEach((e) => {
             e.addEventListener("click", () => {
+                //checkForWin(); ?
                 if(currentPlayer === 0){
                     e.innerHTML = playerArray[currentPlayer].marker;
                     currentPlayer += 1;
+                    checkForWin();
                 }else{
                     e.innerHTML = playerArray[currentPlayer].marker;
                     currentPlayer -= 1;
+                    checkForWin();
                 }
             })
         })
     };
+
+    function checkForWin(){
+        const playingFieldArray = document.querySelectorAll(".row");
+        if(playingFieldArray[0].innerHTML === "X" && playingFieldArray[1].innerHTML === "X" && playingFieldArray[2].innerHTML === "X"){
+            winnerSpan.innerHTML = "The WINNER is: Player 1"
+        }else if(playingFieldArray[3].innerHTML === "X" && playingFieldArray[4].innerHTML === "X" && playingFieldArray[5].innerHTML === "X"){
+            winnerSpan.innerHTML = "The WINNER is: Player 1"
+        }else if(playingFieldArray[6].innerHTML === "X" && playingFieldArray[7].innerHTML === "X" && playingFieldArray[8].innerHTML === "X"){
+            winnerSpan.innerHTML = "The WINNER is: Player 1"
+        }else if(playingFieldArray[2].innerHTML === "X" && playingFieldArray[4].innerHTML === "X" && playingFieldArray[6].innerHTML === "X"){
+            winnerSpan.innerHTML = "The WINNER is: Player 1"
+        }else if(playingFieldArray[0].innerHTML === "O" && playingFieldArray[1].innerHTML === "O" && playingFieldArray[2].innerHTML === "O"){
+            winnerSpan.innerHTML = "The WINNER is: Player 2"
+        }else if(playingFieldArray[3].innerHTML === "O" && playingFieldArray[4].innerHTML === "O" && playingFieldArray[5].innerHTML === "O"){
+            winnerSpan.innerHTML = "The WINNER is: Player 2"
+        }else if(playingFieldArray[6].innerHTML === "O" && playingFieldArray[7].innerHTML === "O" && playingFieldArray[8].innerHTML === "O"){
+            winnerSpan.innerHTML = "The WINNER is: Player 2"
+        }else if(playingFieldArray[2].innerHTML === "O" && playingFieldArray[4].innerHTML === "O" && playingFieldArray[6].innerHTML === "O"){
+            cwinnerSpan.innerHTML = "The WINNER is: Player 2"
+        }else if(playingFieldArray[0].innerHTML === "X" && playingFieldArray[4].innerHTML === "X" && playingFieldArray[8].innerHTML === "X"){
+            winnerSpan.innerHTML = "The WINNER is: Player 1"
+        }else if(playingFieldArray[2].innerHTML === "O" && playingFieldArray[4].innerHTML === "O" && playingFieldArray[6].innerHTML === "O"){
+            winnerSpan.innerHTML = "The WINNER is: Player 2"
+        }
+    }
 
     return {
         createBoard, playingFieldActive
